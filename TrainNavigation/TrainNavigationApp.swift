@@ -15,6 +15,6 @@ struct TrainNavigationApp: App {
             ContentView()
                 .environmentObject(NavigationStateManager())
         }
-        .modelContainer(for: DataItem.self)
+        .modelContainer(for: WorkoutModelItem.self)
     }
 }

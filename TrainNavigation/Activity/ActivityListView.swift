@@ -14,9 +14,18 @@ struct ActivityListView: View {
     let selectedDate: Date
     let dateFormatter = DateFormatter()
     
+    @State private var searchActivity = ""
+    
+    var filteredActivity: [HKWorkoutActivityType] {
+        guard !searchActivity.isEmpty else {return HKWorkoutActivityType.allActivityTypes}
+        return HKWorkoutActivityType.allActivityTypes.filter {
+            $0.displayName.localizedStandardContains(searchActivity)
+        }
+    }
+    
     var body: some View {
         List {
-            ForEach(HKWorkoutActivityType.allActivityTypes, id: \.self) {activity in
+            ForEach(filteredActivity, id: \.self) {activity in
                 ActivityListItemView(activity: activity, selectedDate: selectedDate)
                     .padding()
             }
@@ -28,6 +37,7 @@ struct ActivityListView: View {
         .navigationTitle("Choose your Activity")
         .navigationBarBackButtonHidden()
         .modifier(NavigationBackButton())
+        .searchable(text: $searchActivity, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Activity")
     }
 }
 

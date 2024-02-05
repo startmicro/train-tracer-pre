@@ -10,7 +10,9 @@ import SwiftData
 
 struct WeekDay: View {
     
-    @Query private var items: [DataItem]
+    //@Query private var items: [DataItem]
+    
+    @Query private var items: [WorkoutModelItem]
     
     var date: Date
     var body: some View {
@@ -18,47 +20,54 @@ struct WeekDay: View {
             VStack(alignment: .center){
                 Text(date.weekdaySymbol)
                     .font(.title2)
+                    .foregroundStyle(.white)
                 Text("\(date.day)")
                     .font(.subheadline)
+                    .foregroundStyle(.white)
             }.padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10))
                 .frame(width: 50)
-            
-            
-
-            ForEach(getWorkoutAt(date: self.date), id:\.self) {item in
-                NavigationLink(value: "Hallo") {
-                    Label("", systemImage: item)
+                        
+            ForEach(getWorkoutAt(at: self.date), id:\.self) {item in
+                NavigationLink(value: "\(self.date):\(item)") {
+                    Label("", systemImage: item.workoutActivity.symbol)
                         .font(.largeTitle)
                 }
             }
             
             Spacer()
-            
             NavigationLink(value: date) {
                 Label("", systemImage: "calendar.badge.plus")
                     .font(.largeTitle)
-            }
+                    .foregroundColor(.mint)
+                    //.disabled(date < Date())
+            }.disabled(date < Date())
         }.padding(.horizontal)
+            
     }
     
-    func getWorkoutAt(date: Date) -> [String] {
-        if let item = items.first(where: { $0.date == date }) {
-            return item.name
-        } else {
-            return [""] // Falls die ID nicht gefunden wurde
+    func getWorkoutAt(at desiredDate: Date) -> [WorkoutModelItem] {
+        let calendar = Calendar.current
+
+        // Filtern der Elemente mit dem gewünschten Datum
+        let filteredWorkouts = items.filter { workoutItem in
+            // Die gewünschten Komponenten (Tag, Monat, Jahr) extrahieren
+            let components1 = calendar.dateComponents([.day, .month, .year], from: workoutItem.exactDate)
+            let components2 = calendar.dateComponents([.day, .month, .year], from: desiredDate)
+
+            // Die extrahierten Komponenten vergleichen
+            return components1.day == components2.day &&
+                   components1.month == components2.month &&
+                   components1.year == components2.year
         }
+
+        return filteredWorkouts
     }
+
 }
 
 #Preview {
     WeekDay(date: Date())
 }
-
-
-/*
- 
- */
-
 
 extension Date {
     

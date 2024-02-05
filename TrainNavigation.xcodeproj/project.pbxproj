@@ -69,15 +69,14 @@
 		350376702B544E4D00A12649 /* TrainNavigation */ = {
 			isa = PBXGroup;
 			children = (
-				350376712B544E4D00A12649 /* TrainNavigationApp.swift */,
-				350376732B544E4D00A12649 /* ContentView.swift */,
-				350376912B55A4B800A12649 /* NavigationStateManager.swift */,
 				3503768F2B55A45C00A12649 /* WeekPlanner */,
+				3503768D2B55A41700A12649 /* Activity */,
+				350376902B55A47200A12649 /* WorkoutSetting */,
+				3503768E2B55A43C00A12649 /* Global */,
+				350376732B544E4D00A12649 /* ContentView.swift */,
+				350376712B544E4D00A12649 /* TrainNavigationApp.swift */,
 				350376752B544E4E00A12649 /* Assets.xcassets */,
 				350376772B544E4E00A12649 /* Preview Content */,
-				3503768D2B55A41700A12649 /* Activity */,
-				350376902B55A47200A12649 /* Workout */,
-				3503768E2B55A43C00A12649 /* Global */,
 			);
 			path = TrainNavigation;
 			sourceTree = "<group>";
@@ -102,6 +101,7 @@
 		3503768E2B55A43C00A12649 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				350376912B55A4B800A12649 /* NavigationStateManager.swift */,
 				350376882B54629700A12649 /* HKWorkoutConfiguration+Displaying.swift */,
 				350376872B54629700A12649 /* HKWorkoutConfiguration+Symbol.swift */,
 			);
@@ -117,13 +117,13 @@
 			path = WeekPlanner;
 			sourceTree = "<group>";
 		};
-		350376902B55A47200A12649 /* Workout */ = {
+		350376902B55A47200A12649 /* WorkoutSetting */ = {
 			isa = PBXGroup;
 			children = (
 				3503768B2B54649500A12649 /* WorkoutSettingView.swift */,
 				350376932B55AFBE00A12649 /* WorkoutModel.swift */,
 			);
-			path = Workout;
+			path = WorkoutSetting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
